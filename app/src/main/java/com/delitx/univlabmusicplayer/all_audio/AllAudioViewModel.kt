@@ -35,23 +35,6 @@ class AllAudioViewModel @Inject constructor(
     }
 
     fun startPlaybackOfAudio(audio: AudioElement) {
-        player.stop()
-        player.clearMediaItems()
-        val audioItems = audioListFlow.value
-        val itemToPlayIndex = audioItems.indexOfFirst { it.name == audio.name && it.path == audio.path }
-        if (itemToPlayIndex == -1) return
-
-        val mediaItems = audioItems.map {
-            MediaItem.Builder()
-                .setUri(File(it.path).toUri())
-                .build()
-        }
-        player.setMediaItems(mediaItems)
-        player.prepare()
-        player.seekTo(itemToPlayIndex, 0L)
-        player.playWhenReady = true
-
-        playerController.updateQueue { audioItems }
-        playerController.updateCurrentState { PlaybackState(isPlaying = true, audio) }
+        playerController.initializePlayback(audioListFlow.value, audio)
     }
 }

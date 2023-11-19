@@ -11,9 +11,8 @@ class PlayingAudioViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun changePlaybackState() {
-        playerController.updateCurrentState { state ->
-            state?.copy(isPlaying = !state.isPlaying)
-        }
+        val isPlaying = playerController.stateFlow.value?.isPlaying ?: false
+        playerController.setPlaying(!isPlaying)
     }
 
     val currentPlaybackStateFlow = playerController.stateFlow

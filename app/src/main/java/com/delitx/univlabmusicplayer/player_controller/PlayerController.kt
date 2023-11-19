@@ -9,6 +9,13 @@ interface PlayerController {
     val queueFlow: StateFlow<List<AudioElement>>
     val stateFlow: StateFlow<PlaybackState?>
 
-    fun updateCurrentState(update: (PlaybackState?) -> PlaybackState?)
-    fun updateQueue(update: (List<AudioElement>) -> List<AudioElement>)
+    fun initializePlayback(queue: List<AudioElement>, initialAudio: AudioElement)
+
+    fun selectAudio(audio: AudioElement)
+
+    fun setPlaying(isPlaying: Boolean)
+
+    fun seekTo(progress: Float)
+
+    fun seekBy(delta: Long)
 }

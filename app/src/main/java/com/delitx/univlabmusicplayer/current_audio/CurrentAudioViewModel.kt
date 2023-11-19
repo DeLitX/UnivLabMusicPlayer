@@ -10,4 +10,33 @@ class CurrentAudioViewModel @Inject constructor(
     private val playerController: PlayerController,
 ) : ViewModel() {
     val currentPlaybackStateFlow = playerController.stateFlow
+
+    fun selectPreviousAudio() {
+        val queue = playerController.queueFlow.value
+        val currentAudio = currentPlaybackStateFlow.value?.currentAudio ?: return
+        val currentAudioIndex = queue.indexOfFirst { it.name == currentAudio.name && it.path == currentAudio.path }
+        if (currentAudioIndex == -1 || currentAudioIndex == 0) return
+        playerController.selectAudio(queue[currentAudioIndex - 1])
+    }
+
+    fun selectNextAudio() {
+        val queue = playerController.queueFlow.value
+        val currentAudio = currentPlaybackStateFlow.value?.currentAudio ?: return
+        val currentAudioIndex = queue.indexOfFirst { it.name == currentAudio.name && it.path == currentAudio.path }
+        if (currentAudioIndex == -1 || currentAudioIndex == queue.lastIndex) return
+        playerController.selectAudio(queue[currentAudioIndex + 1])
+    }
+
+    fun changePlaybackState() {
+        val newPlayingState = !(currentPlaybackStateFlow.value?.isPlaying ?: false)
+        playerController.setPlaying(newPlayingState)
+    }
+
+    fun seekTo(progress: Float) {
+        playerController.seekTo(progress = progress)
+    }
+
+    fun seekBy(delta: Long) {
+        playerController.seekBy(delta)
+    }
 }

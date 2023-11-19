@@ -7,8 +7,8 @@ import kotlinx.coroutines.flow.StateFlow
 interface PlayerController {
 
     val queueFlow: StateFlow<List<AudioElement>>
-    val stateFlow: StateFlow<PlaybackState>
+    val stateFlow: StateFlow<PlaybackState?>
 
-    fun updateCurrentState(update: (PlaybackState) -> PlaybackState)
+    fun updateCurrentState(update: (PlaybackState?) -> PlaybackState?)
     fun updateQueue(update: (List<AudioElement>) -> List<AudioElement>)
 }

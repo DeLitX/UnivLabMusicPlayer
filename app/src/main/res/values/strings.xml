@@ -2,4 +2,5 @@
     <string name="app_name">UnivLabMusicPlayer</string>
     <string name="bottom_navigation_tab_all_audio">All audio</string>
     <string name="bottom_navigation_tab_playlists">Playlists</string>
+    <string name="noting_playing">Nothing playing</string>
 </resources>

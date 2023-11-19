@@ -13,10 +13,10 @@ class PlayerControllerImpl @Inject constructor() : PlayerController {
     private val _queueFlow = MutableStateFlow<List<AudioElement>>(emptyList())
     override val queueFlow: StateFlow<List<AudioElement>> = _queueFlow.asStateFlow()
 
-    private val _stateFlow = MutableStateFlow<PlaybackState>(PlaybackState(false, null))
-    override val stateFlow: StateFlow<PlaybackState> = _stateFlow.asStateFlow()
+    private val _stateFlow = MutableStateFlow<PlaybackState?>(null)
+    override val stateFlow: StateFlow<PlaybackState?> = _stateFlow.asStateFlow()
 
-    override fun updateCurrentState(update: (PlaybackState) -> PlaybackState) {
+    override fun updateCurrentState(update: (PlaybackState?) -> PlaybackState?) {
         _stateFlow.update(update)
     }
 

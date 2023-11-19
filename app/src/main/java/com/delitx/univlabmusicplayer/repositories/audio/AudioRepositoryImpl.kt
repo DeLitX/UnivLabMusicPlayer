@@ -10,7 +10,7 @@ import com.delitx.univlabmusicplayer.model.AudioMetadata
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.File
 import javax.inject.Inject
-import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 
 class AudioRepositoryImpl @Inject constructor(
     @ApplicationContext
@@ -63,7 +63,7 @@ class AudioRepositoryImpl @Inject constructor(
             metadata = AudioMetadata(
                 authorName = artist,
                 albumTitle = album,
-                duration = duration.milliseconds,
+                duration = (duration / 1000).seconds,
                 albumImage = albumImageUri,
             ),
         )

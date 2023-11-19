@@ -13,8 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.delitx.univlabmusicplayer.player_controller.PlayerController
 import com.delitx.univlabmusicplayer.service.PlayerService
-import com.delitx.univlabmusicplayer.ui.main.MainScreen
-import com.delitx.univlabmusicplayer.ui.theme.UnivLabMusicPlayerTheme
+import com.delitx.univlabmusicplayer.screens.main.MainScreen
+import com.delitx.univlabmusicplayer.screens.theme.UnivLabMusicPlayerTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
                 playerController.stateFlow.collect {
-                    if (it.isPlaying) {
+                    if (it?.isPlaying == true) {
                         startService()
                     }
                 }

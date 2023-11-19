@@ -10,4 +10,5 @@ interface PlayerController {
     val stateFlow: StateFlow<PlaybackState>
 
     fun updateCurrentState(update: (PlaybackState) -> PlaybackState)
+    fun updateQueue(update: (List<AudioElement>) -> List<AudioElement>)
 }

@@ -16,10 +16,12 @@ class PlayerService : MediaSessionService() {
     @Inject
     lateinit var player: Player
 
-    private val notificationManager: PlayerServiceNotificationManager = PlayerServiceNotificationManager(
-        applicationContext,
-        player,
-    )
+    private val notificationManager: PlayerServiceNotificationManager by lazy {
+        PlayerServiceNotificationManager(
+            applicationContext,
+            player,
+        )
+    }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         notificationManager.startNotification(mediaSession, this)

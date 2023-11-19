@@ -14,7 +14,7 @@ class CurrentAudioViewModel @Inject constructor(
     fun selectPreviousAudio() {
         val queue = playerController.queueFlow.value
         val currentAudio = currentPlaybackStateFlow.value?.currentAudio ?: return
-        val currentAudioIndex = queue.indexOfFirst { it.name == currentAudio.name && it.path == currentAudio.path }
+        val currentAudioIndex = queue.indexOfFirst { it.id == currentAudio.id }
         if (currentAudioIndex == -1 || currentAudioIndex == 0) return
         playerController.selectAudio(queue[currentAudioIndex - 1])
     }
@@ -22,7 +22,7 @@ class CurrentAudioViewModel @Inject constructor(
     fun selectNextAudio() {
         val queue = playerController.queueFlow.value
         val currentAudio = currentPlaybackStateFlow.value?.currentAudio ?: return
-        val currentAudioIndex = queue.indexOfFirst { it.name == currentAudio.name && it.path == currentAudio.path }
+        val currentAudioIndex = queue.indexOfFirst { it.id == currentAudio.id }
         if (currentAudioIndex == -1 || currentAudioIndex == queue.lastIndex) return
         playerController.selectAudio(queue[currentAudioIndex + 1])
     }

@@ -53,11 +53,13 @@ class AudioRepositoryImpl @Inject constructor(
         val album = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM)) ?: "Unknown"
         val artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)) ?: "Unknown"
         val path = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA))
+        val id = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media._ID)).toString()
         val duration = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION))
         val albumId = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)).toString()
         val uri = Uri.parse("content://media/external/audio/albumart")
         val albumImageUri = Uri.withAppendedPath(uri, albumId)
         val audioElement = AudioElement(
+            id = id,
             name = title,
             path = path,
             metadata = AudioMetadata(
@@ -68,11 +70,11 @@ class AudioRepositoryImpl @Inject constructor(
             ),
         )
         val file = File(audioElement.path)
-        println("asdasd $audioElement")
         return if (file.exists()) audioElement else null
     }
 
     private val audioProjection = arrayOf(
+        MediaStore.Audio.Media._ID,
         MediaStore.Audio.Media.TITLE,
         MediaStore.Audio.Media.ALBUM,
         MediaStore.Audio.Media.ARTIST,

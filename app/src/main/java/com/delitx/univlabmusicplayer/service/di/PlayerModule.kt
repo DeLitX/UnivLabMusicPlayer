@@ -3,6 +3,7 @@ package com.delitx.univlabmusicplayer.service.di
 import android.content.Context
 import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
+import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
@@ -29,7 +30,7 @@ class PlayerModule {
     @Provides
     @Singleton
     @UnstableApi
-    fun providePlayer(
+    fun provideExoPlayer(
         @ApplicationContext context: Context,
         audioAttributes: AudioAttributes,
     ): ExoPlayer =
@@ -38,6 +39,12 @@ class PlayerModule {
             .setHandleAudioBecomingNoisy(true)
             .setTrackSelector(DefaultTrackSelector(context))
             .build()
+
+    @Provides
+    @Singleton
+    fun providePlayer(
+        exoPlayer: ExoPlayer,
+    ): Player = exoPlayer
 
     @Provides
     @Singleton

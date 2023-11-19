@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:name=".MusicPlayerApplication"
         android:theme="@style/Theme.UnivLabMusicPlayer"
-        tools:targetApi="31">
+        tools:targetApi="34">
         <activity
             android:name=".MainActivity"
             android:exported="true"

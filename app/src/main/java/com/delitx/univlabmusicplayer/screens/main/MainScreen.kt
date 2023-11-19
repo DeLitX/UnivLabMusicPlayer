@@ -48,6 +48,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import com.bumptech.glide.integration.compose.placeholder
 import com.delitx.univlabmusicplayer.R
 import com.delitx.univlabmusicplayer.navigation.NavScreen
 import com.delitx.univlabmusicplayer.screens.all_audio.AllAudioScreen
@@ -140,6 +141,8 @@ private fun PlayingAudioStatus(
                         model = currentAudio.metadata.albumImage,
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
+                        loading = placeholder(R.drawable.ic_placeholder),
+                        failure = placeholder(R.drawable.ic_placeholder),
                         modifier = Modifier
                             .padding(start = 20.dp)
                             .size(36.dp)

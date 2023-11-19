@@ -23,6 +23,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import com.bumptech.glide.integration.compose.placeholder
+import com.delitx.univlabmusicplayer.R
 import com.delitx.univlabmusicplayer.all_audio.AllAudioViewModel
 import com.delitx.univlabmusicplayer.model.AudioElement
 
@@ -59,6 +61,8 @@ private fun AudioElementItem(audioElement: AudioElement, modifier: Modifier = Mo
             contentDescription = null,
             modifier = Modifier.size(64.dp).clip(CircleShape),
             contentScale = ContentScale.Crop,
+            loading = placeholder(R.drawable.ic_placeholder),
+            failure = placeholder(R.drawable.ic_placeholder),
         )
         Column(modifier = Modifier.padding(start = 16.dp).align(Alignment.Top)) {
             Text(text = audioElement.name)

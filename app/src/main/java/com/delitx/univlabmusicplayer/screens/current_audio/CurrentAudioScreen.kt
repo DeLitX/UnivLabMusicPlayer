@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import com.bumptech.glide.integration.compose.placeholder
 import com.delitx.univlabmusicplayer.R
 import com.delitx.univlabmusicplayer.current_audio.CurrentAudioViewModel
 import com.delitx.univlabmusicplayer.model.PlaybackState
@@ -84,6 +85,8 @@ private fun AudioPlayingScreen(
                     .fillMaxSize(0.8f)
                     .align(Alignment.Center),
                 contentScale = ContentScale.Fit,
+                loading = placeholder(R.drawable.ic_placeholder),
+                failure = placeholder(R.drawable.ic_placeholder),
             )
         }
         BottomControls(

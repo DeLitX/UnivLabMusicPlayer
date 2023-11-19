@@ -4,6 +4,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import androidx.core.graphics.drawable.toBitmap
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.ui.PlayerNotificationManager
@@ -11,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import com.delitx.univlabmusicplayer.R
 
 @UnstableApi
 class PlayerServiceNotificationAdapter(
@@ -42,6 +44,11 @@ class PlayerServiceNotificationAdapter(
                     transition: Transition<in Bitmap>?,
                 ) {
                     callback.onBitmap(resource)
+                }
+
+                override fun onLoadFailed(errorDrawable: Drawable?) {
+                    val bitmap = context.getDrawable(R.drawable.ic_placeholder)?.toBitmap() ?: return
+                    callback.onBitmap(bitmap)
                 }
             })
         return null

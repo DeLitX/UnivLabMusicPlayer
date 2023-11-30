@@ -57,6 +57,8 @@ fun CurrentAudioScreen(
                     onSelectPrevious = { viewModel.selectPreviousAudio() },
                     onSelectNext = { viewModel.selectNextAudio() },
                     onPlayPause = { viewModel.changePlaybackState() },
+                    onFastForward = { viewModel.fastForward() },
+                    onFastBackward = { viewModel.fastBackward() },
                 )
             }
         }
@@ -71,6 +73,8 @@ private fun AudioPlayingScreen(
     onSelectPrevious: () -> Unit,
     onSelectNext: () -> Unit,
     onPlayPause: () -> Unit,
+    onFastForward: () -> Unit,
+    onFastBackward: () -> Unit,
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
         Box(
@@ -95,6 +99,8 @@ private fun AudioPlayingScreen(
             onSelectPrevious = onSelectPrevious,
             onSelectNext = onSelectNext,
             onPlayPause = onPlayPause,
+            onFastForward = onFastForward,
+            onFastBackward = onFastBackward,
             modifier = Modifier
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.secondary),
@@ -110,6 +116,8 @@ private fun BottomControls(
     onSelectPrevious: () -> Unit,
     onSelectNext: () -> Unit,
     onPlayPause: () -> Unit,
+    onFastForward: () -> Unit,
+    onFastBackward: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -168,6 +176,15 @@ private fun BottomControls(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             Icon(
+                painter = painterResource(id = exoR.drawable.exo_ic_rewind),
+                contentDescription = null,
+                modifier = Modifier.size(48.dp)
+                    .clickable {
+                        onFastBackward()
+                    },
+                tint = MaterialTheme.colorScheme.onPrimary,
+            )
+            Icon(
                 painter = painterResource(id = exoR.drawable.exo_icon_previous),
                 contentDescription = null,
                 modifier = Modifier.size(48.dp)
@@ -191,6 +208,15 @@ private fun BottomControls(
                 modifier = Modifier.size(48.dp)
                     .clickable {
                         onSelectNext()
+                    },
+                tint = MaterialTheme.colorScheme.onPrimary,
+            )
+            Icon(
+                painter = painterResource(id = exoR.drawable.exo_ic_forward),
+                contentDescription = null,
+                modifier = Modifier.size(48.dp)
+                    .clickable {
+                        onFastForward()
                     },
                 tint = MaterialTheme.colorScheme.onPrimary,
             )

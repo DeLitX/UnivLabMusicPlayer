@@ -11,6 +11,14 @@ class CurrentAudioViewModel @Inject constructor(
 ) : ViewModel() {
     val currentPlaybackStateFlow = playerController.stateFlow
 
+    fun fastForward() {
+        playerController.seekBy(15000)
+    }
+
+    fun fastBackward() {
+        playerController.seekBy(-15000)
+    }
+
     fun selectPreviousAudio() {
         val queue = playerController.queueFlow.value
         val currentAudio = currentPlaybackStateFlow.value?.currentAudio ?: return

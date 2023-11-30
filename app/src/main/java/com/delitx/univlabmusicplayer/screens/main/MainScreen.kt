@@ -104,7 +104,7 @@ private fun BottomBar(navController: NavHostController) {
     ) {
         Column {
             PlayingAudioStatus(navController = navController)
-            BottomNavigation(navController = navController)
+            // BottomNavigation(navController = navController)
         }
     }
 }

@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("org.jetbrains.dokka")
 }
 
 android {
@@ -89,4 +90,6 @@ dependencies {
     // Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("com.github.bumptech.glide:compose:1.0.0-beta01")
+
+    dokkaPlugin("org.jetbrains.dokka:android-documentation-plugin:1.9.10")
 }
